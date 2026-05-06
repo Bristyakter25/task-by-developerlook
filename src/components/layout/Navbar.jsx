@@ -13,8 +13,8 @@ const Navbar = () => {
       </header> */}
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-10 py-6">
-        <div className="text-2xl font-bold tracking-tighter">
+      <nav className="flex items-center justify-between px-6 py-6">
+        <div className="text-3xl font-semibold tracking-tighter">
           Rise at Seven®
         </div>
 
@@ -39,13 +39,28 @@ const Navbar = () => {
   <li className="cursor-pointer px-3 py-[7px] rounded-full text-white hover:bg-white hover:text-black transition-colors duration-250">Webinar</li>
 </ul>
 
-        <button className="flex items-center gap-4 hover:rounded-xl bg-white text-black px-6 py-3 rounded-full font-bold  transition">
-          Get In Touch
-          <MoveUpRight size={20} />
-        </button>
+       <button className="group relative flex items-center gap-2 overflow-hidden bg-white text-black px-4 py-3 rounded-full font-bold hover:rounded-xl transition-[border-radius] duration-300">
+
+  <span className="relative overflow-hidden h-[1.2em] flex items-center">
+    {/* Flies out upward on hover */}
+    <span className="block whitespace-nowrap translate-y-0 group-hover:-translate-y-[110%] transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+      Get In Touch
+    </span>
+    {/* Enters from below and stays on hover */}
+    <span className="absolute inset-0 flex items-center whitespace-nowrap translate-y-[110%] group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+      Get In Touch
+    </span>
+  </span>
+
+  <span className="inline-flex transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
+    <MoveUpRight size={18} />
+  </span>
+
+</button>
       </nav>
     </>
   );
 };
 
 export default Navbar;
+
