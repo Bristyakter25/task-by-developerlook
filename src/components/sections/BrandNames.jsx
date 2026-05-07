@@ -30,28 +30,26 @@ export default function BrandNames() {
         <div className="relative flex-1 overflow-hidden">
 
           {/* blurry effects */}
+{/* Left Blur Overlay */}
 <div
-  className="absolute left-0 top-0 h-full w-40 md:w-56 z-10 pointer-events-none"
+  className="absolute left-0 top-0 h-full w-24 md:w-40 z-10 pointer-events-none"
   style={{
-    backdropFilter: "blur(14px)",
-    WebkitBackdropFilter: "blur(14px)",
-    maskImage:
-      "linear-gradient(to right, black 0%, rgba(0,0,0,0.5) 40%, transparent 100%)",
-    WebkitMaskImage:
-      "linear-gradient(to right, black 0%, rgba(0,0,0,0.5) 40%, transparent 100%)",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
+    // This mask makes the BLUR itself fade out smoothly
+    maskImage: "linear-gradient(to right, black 0%, rgba(0,0,0,0.8) 20%, transparent 100%)",
+    WebkitMaskImage: "linear-gradient(to right, black 0%, rgba(0,0,0,0.8) 20%, transparent 100%)",
   }}
 />
 
-
+{/* Right Blur Overlay */}
 <div
-  className="absolute right-0 top-0 h-full w-40 md:w-56 z-10 pointer-events-none"
+  className="absolute right-0 top-0 h-full w-24 md:w-40 z-10 pointer-events-none"
   style={{
-    backdropFilter: "blur(14px)",
-    WebkitBackdropFilter: "blur(14px)",
-    maskImage:
-      "linear-gradient(to left, black 0%, rgba(0,0,0,0.5) 40%, transparent 100%)",
-    WebkitMaskImage:
-      "linear-gradient(to left, black 0%, rgba(0,0,0,0.5) 40%, transparent 100%)",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
+    maskImage: "linear-gradient(to left, black 0%, rgba(0,0,0,0.8) 20%, transparent 100%)",
+    WebkitMaskImage: "linear-gradient(to left, black 0%, rgba(0,0,0,0.8) 20%, transparent 100%)",
   }}
 />
 
@@ -65,7 +63,7 @@ export default function BrandNames() {
                 <img
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-7 md:h-9 w-auto object-contain  "
+                  className="h-7 md:h-12 w-auto object-contain  "
                 />
               </div>
             ))}

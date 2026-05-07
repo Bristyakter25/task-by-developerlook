@@ -1,5 +1,6 @@
 import Banner from "../components/sections/Banner";
 import BrandNames from "../components/sections/BrandNames";
+import FeaturedWork from "../components/sections/FeaturedWork";
 import ServiceSection from "../components/sections/ServiceSection";
 
 
@@ -9,6 +10,7 @@ const HomePage = () => {
        <Banner></Banner>
        <BrandNames></BrandNames>
        <ServiceSection></ServiceSection>
+       <FeaturedWork></FeaturedWork>
        </div>
     );
 };

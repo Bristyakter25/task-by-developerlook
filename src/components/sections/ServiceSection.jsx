@@ -32,7 +32,7 @@ const ServiceSection = () => {
 
         {/* Buttons */}
         <div className="mt-6 flex gap-3 items-center">
-           <button className="group relative flex items-center gap-2 overflow-hidden bg-white text-black px-5 py-4 rounded-full font-bold hover:rounded-xl transition-[border-radius] duration-300">
+           <button className="group relative flex items-center gap-2 overflow-hidden bg-white text-black px-5 py-3 rounded-full font-bold hover:rounded-xl transition-[border-radius] duration-300">
 
   <span className="relative overflow-hidden h-[1.2em] flex items-center">
     {/* Flies out upward on hover */}
