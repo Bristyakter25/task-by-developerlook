@@ -1,6 +1,7 @@
 import Banner from "../components/sections/Banner";
 import BrandNames from "../components/sections/BrandNames";
 import FeaturedWork from "../components/sections/FeaturedWork";
+import Features from "../components/sections/Features";
 import Marquee from "../components/sections/Marquee";
 import Services from "../components/sections/Services";
 import ServiceSection from "../components/sections/ServiceSection";
@@ -15,6 +16,7 @@ const HomePage = () => {
        <FeaturedWork></FeaturedWork>
        <Services></Services>
        <Marquee></Marquee>
+       <Features></Features>
        </div>
     );
 };
