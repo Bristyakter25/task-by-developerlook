@@ -3,60 +3,7 @@ import img8 from "../../assets/theDrum.png";
 
 const Hero = ({ randomImage }) => {
   return (
-    // <main className="flex flex-col items-center justify-center pt-24 text-center px-4">
-
-    //   {/* Awards */}
-    //   <div className="flex flex-col items-center mb-8">
-
-    //     <p className="uppercase text-[11px] md:text-xs tracking-wide leading-tight mb-3">
-    //       #1 Most recommended <br /> content marketing agency
-    //     </p>
-
-    //     <div className="flex items-center gap-3 md:gap-4">
-
-    //       {/* Left Laurel */}
-    //       <svg className="w-6 fill-white opacity-90" viewBox="0 0 28 38">
-    //         <path d="M25.826 36.2423..." />
-    //       </svg>
-
-    //       {/* Logos */}
-    //       <img src={img7} className="h-5 md:h-6 object-contain opacity-90" />
-    //       <img src={img8} className="h-5 md:h-6 object-contain opacity-90" />
-
-    //       {/* Right Laurel */}
-    //       <svg className="w-6 fill-white opacity-90 scale-x-[-1]" viewBox="0 0 28 38">
-    //         <path d="M25.826 36.2423..." />
-    //       </svg>
-    //     </div>
-    //   </div>
-
-    //   {/* Heading */}
-    //   <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] max-w-5xl">
-    //     We Create <br />
-    //     Category
-    //     <span className="inline-block mx-4 align-middle">
-    //       <img
-    //         src={randomImage}
-    //         className="w-16 h-16 md:w-20 md:h-20 rounded-2xl object-cover border border-white/20"
-    //       />
-    //     </span>
-    //     Leaders
-    //   </h1>
-
-    //   <p className="mt-6 text-lg md:text-xl text-gray-200">
-    //     on every searchable platform
-    //   </p>
-
-    //   {/* Footer texts */}
-    //   <div className="absolute bottom-10 left-10 max-w-md text-sm text-gray-300 text-left">
-    //     Organic media planners creating, distributing & optimising search-first content...
-    //   </div>
-
-    //   <div className="absolute bottom-10 right-10 text-sm text-gray-300 text-right">
-    //     4 Global Offices serving <br />
-    //     UK, USA (New York) & EU
-    //   </div>
-    // </main>
+  
 
     <div>
          <main className="relative  z-10 flex flex-col items-center justify-center pt-24 text-center px-4">

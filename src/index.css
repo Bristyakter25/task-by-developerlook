@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "daisyui";
 @theme {
   --animate-marquee: marquee 28s linear infinite;
 
