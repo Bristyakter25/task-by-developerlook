@@ -16,7 +16,7 @@ import img8 from "../../assets/images/work8.PNG";
 import img9 from "../../assets/images/work9.PNG";
 import img10 from "../../assets/images/work10.PNG";
 import img11 from "../../assets/images/work11.PNG";
-import { div } from "framer-motion/client";
+
 import { MoveUpRight } from "lucide-react";
 
 const projects = [
@@ -47,31 +47,31 @@ const projectColors = [
   "#6D23B6",
 ];
 
-function ImageCard({ src, tag, className = "" }) {
-  return (
-    <div className={`relative overflow-hidden rounded-[22px] bg-neutral-900 ${className}`}>
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={src}
-          src={src}
-          alt={tag}
-          className="w-full h-full object-cover"
-          initial={{ opacity: 0, scale: 0.96, y: 18 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.98, y: -12 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        />
-      </AnimatePresence>
-      <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-black/55 backdrop-blur-md px-2.5 py-1 text-[10px] font-semibold text-white/80 tracking-wide">
-        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-        {tag}
-      </div>
-    </div>
-  );
-}
+// function ImageCard({ src, tag, className = "" }) {
+//   return (
+//     <div className={`relative overflow-hidden rounded-[22px] bg-neutral-900 ${className}`}>
+//       <AnimatePresence mode="wait">
+//         <motion.img
+//           key={src}
+//           src={src}
+//           alt={tag}
+//           className="w-full h-full object-cover"
+//           initial={{ opacity: 0, scale: 0.96, y: 18 }}
+//           animate={{ opacity: 1, scale: 1, y: 0 }}
+//           exit={{ opacity: 0, scale: 0.98, y: -12 }}
+//           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+//         />
+//       </AnimatePresence>
+//       <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-black/55 backdrop-blur-md px-2.5 py-1 text-[10px] font-semibold text-white/80 tracking-wide">
+//         <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+//           <circle cx="11" cy="11" r="8" />
+//           <line x1="21" y1="21" x2="16.65" y2="16.65" />
+//         </svg>
+//         {tag}
+//       </div>
+//     </div>
+//   );
+// }
 
 function Tag({ label }) {
   return (
