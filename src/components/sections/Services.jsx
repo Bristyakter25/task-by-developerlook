@@ -46,7 +46,7 @@ export default function Services() {
       </div>
 
       {/* Divider */}
-      <div className="w-full h-[1px] bg-gray-400 mb-12" />
+      <div className="w-full h-[1px] bg-gray-400 mb-10" />
 <div className="grid grid-cols-1  mx-13 md:grid-cols-2 gap-x-20">
   {services.map((service, index) => (
     <div
