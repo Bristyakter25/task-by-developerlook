@@ -4,6 +4,7 @@ import FeaturedWork from "../components/sections/FeaturedWork";
 import Features from "../components/sections/Features";
 import Marquee from "../components/sections/Marquee";
 import NewArrivals from "../components/sections/NewArrivals";
+import ScrollingText from "../components/sections/ScrollingText";
 import Services from "../components/sections/Services";
 import ServiceSection from "../components/sections/ServiceSection";
 
@@ -19,6 +20,7 @@ const HomePage = () => {
        <Marquee></Marquee>
        <Features></Features>
        <NewArrivals></NewArrivals>
+       <ScrollingText></ScrollingText>
        </div>
     );
 };
