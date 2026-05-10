@@ -21,7 +21,7 @@ export default function Services() {
     <section className="max-w-[1140px] mx-auto px-6 py-12 font-sans">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-end md:items-center mb-10 gap-6">
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight text-black flex items-center flex-wrap">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-black flex items-center flex-wrap">
           Our
           <span className="inline-block mx-4">
             <img
@@ -32,17 +32,24 @@ export default function Services() {
           </span>
           Services
         </h1>
-        <button className="group relative flex items-center gap-2 overflow-hidden bg-white border border-gray-200 text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-black hover:text-white transition-all duration-300">
-          <span className="relative overflow-hidden h-[1.2em] flex items-center">
-            <span className="block translate-y-0 group-hover:-translate-y-[110%] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
-              View All Services
-            </span>
-            <span className="absolute inset-0 flex items-center translate-y-[110%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
-              View All Services
-            </span>
-          </span>
-          <MoveUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </button>
+       <button className="group relative flex mt-7 items-center gap-2 overflow-hidden bg-white text-black px-5 py-3 rounded-full font-bold hover:rounded-xl transition-[border-radius] duration-300">
+
+  <span className="relative overflow-hidden h-[1.2em] flex items-center">
+    {/* Flies out upward on hover */}
+    <span className="block font-sans-primary font-medium whitespace-nowrap translate-y-0 group-hover:-translate-y-[110%] transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+      View All Services
+    </span>
+    {/* Enters from below and stays on hover */}
+    <span className="absolute font-sans-primary font-medium inset-0 flex items-center whitespace-nowrap translate-y-[110%] group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+     View All Services
+    </span>
+  </span>
+
+  <span className="inline-flex transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
+    <MoveUpRight size={18} />
+  </span>
+
+</button>
       </div>
 
       {/* Divider */}
