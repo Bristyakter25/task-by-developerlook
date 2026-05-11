@@ -27,8 +27,13 @@ html.lenis body {
   overscroll-behavior: contain;
 }
 
+/* optional */
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
-  background: black;
+  background: #f0f0f0;
   overflow-x: hidden;
   font-family: "Inter", sans-serif;
 }
