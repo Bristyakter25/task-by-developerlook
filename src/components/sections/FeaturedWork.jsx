@@ -158,8 +158,8 @@ export default function FeaturedWork() {
   return (
     <div>
       <div ref={containerRef} className="relative" style={{ height: `${projects.length * 100}vh` }}>
-        <div className="sticky top-0 w-full flex items-center justify-center p-4 md:p-6">
-          <div className="w-full h-full max-w-[1400px] bg-[#0c0c0c] rounded-[40px] overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+        <div className="sticky top-0 w-full flex items-center justify-center p-4 md:p-6 h-screen overflow-hidden">
+          <div className="w-full h-full max-w-[1400px] bg-[#0c0c0c] rounded-[40px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 max-h-[90vh] lg:max-h-none">
 <p className="lg:hidden text-[14px] pl-7 pt-6 font-bold text-white uppercase">Featured Work</p>
             {/* LEFT: CONTENT & LIST — hidden on mobile/tablet, visible on lg+ */}
             <div className="hidden lg:flex flex-col justify-between p-10 md:p-16">
@@ -224,7 +224,7 @@ export default function FeaturedWork() {
             </div>
 
             {/* RIGHT: IMAGE GRID — full width on mobile, half on lg+ */}
-            <div className="relative w-full lg:w-[500px] mt-2 h-full flex flex-col gap-4 p-4">
+            <div className="relative w-full lg:w-[500px] mt-2 h-[70vh] lg:h-full flex flex-col gap-4 p-4 overflow-hidden">
 
               {isLast ? (
                 <>
