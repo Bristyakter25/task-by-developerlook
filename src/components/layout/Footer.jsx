@@ -35,7 +35,7 @@ const Footer = () => {
           </h3>
 
           {/* input mail*/}
-          <div className="relative mb-5 max-w-[310px]">
+          <div className="relative mb-5 w-full lg:max-w-[310px]">
             <input
               type="email"
               placeholder="Your Email Address"
@@ -64,12 +64,16 @@ const Footer = () => {
 
         
         {/* right nav */}
-<div className="grid grid-cols-1 border-[#3d3c3c] lg:grid-cols-3 lg:border-l">
+<div className="grid grid-cols-2 gap-y-8 border-[#3d3c3c] lg:grid-cols-3 lg:border-l">
   {navCols.map((col, i) => (
     <div
-      key={i}
-      className="flex flex-col gap-[5px]  border-[#3d3c3c] lg:border-l px-0 py-0 lg:px-7"
-    >
+  key={i}
+  className={`flex flex-col gap-[5px] border-l border-[#3d3c3c] lg:border-l px-3 py-0 lg:px-7 ${
+    i === 2
+      ? "col-start-2 row-span-2 row-start-1 self-start lg:col-start-auto lg:row-span-1 lg:row-start-auto lg:self-auto"
+      : ""
+  }`}
+>
       {col.map((item) => (
         <a
           key={item}
