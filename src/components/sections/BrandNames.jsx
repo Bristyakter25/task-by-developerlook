@@ -17,17 +17,17 @@ const logos = [
 export default function BrandNames() {
   return (
     <section className="w-full  py-10">
-      <div className="flex items-center gap-4">
+      <div className="lg:flex  items-center gap-4">
 
        
         <div className="shrink-0 pl-5 md:pl-8">
-          <p className="text-black text-sm  font-medium ">
+          <p className="text-black mb-7 lg:mb-0 text-sm  font-medium ">
             The agency behind ..
           </p>
         </div>
 
        
-        <div className="relative flex-1 overflow-hidden">
+        <div className="relative  lg:flex-1 overflow-hidden">
 
           {/* blurry effects */}
 {/* Left Blur Overlay */}
@@ -58,7 +58,7 @@ export default function BrandNames() {
             {[...logos, ...logos].map((logo, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center shrink-0 px-14 md:px-20"
+                className="flex items-center justify-center py-3 shrink-0 px-14 md:px-20"
               >
                 <img
                   src={logo.src}
