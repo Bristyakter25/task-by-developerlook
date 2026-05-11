@@ -44,7 +44,6 @@ function BlogCard({ image, author, readTime, title, tag }) {
   }
 
   return (
-    
     <div
       ref={wrapperRef}
       className="group relative cursor-none"
@@ -52,7 +51,7 @@ function BlogCard({ image, author, readTime, title, tag }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Cursor-following arrow — now child of the full card */}
+      {/* Cursor-following arrow */}
       <div
         className="pointer-events-none absolute z-20 transition-opacity duration-300"
         style={{
@@ -69,11 +68,10 @@ function BlogCard({ image, author, readTime, title, tag }) {
             transition: 'transform 0.3s cubic-bezier(0.22,1,0.36,1)',
           }}
         >
-          <MoveUpRight size={24} className="text-gray-900 font-extrabold " />
+          <MoveUpRight size={24} className="text-gray-900 font-extrabold" />
         </div>
       </div>
 
-      
       <div className="relative overflow-hidden rounded-2xl">
         <img
           src={image}
@@ -87,7 +85,6 @@ function BlogCard({ image, author, readTime, title, tag }) {
         )}
       </div>
 
-      {/* Cards  */}
       <div className="py-4 pb-5">
         <div className="flex items-center gap-3 text-xs text-gray-500 mb-2 font-sans">
           <span className="bg-white py-2 rounded-3xl text-gray-600 text-[15px] leading-tight flex items-center gap-1.5">
@@ -107,11 +104,108 @@ function BlogCard({ image, author, readTime, title, tag }) {
 }
 
 export function BlogCards() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const trackRef = useRef(null)
+  const touchStartX = useRef(0)
+  const dragStartX = useRef(0)
+  const baseOffset = useRef(0)
+  const isDragging = useRef(false)
+
+  function getCardWidth() {
+    const card = trackRef.current?.children[0]
+    return card ? card.offsetWidth + 16 : 0
+  }
+
+  function goTo(index) {
+    const clamped = Math.max(0, Math.min(index, cards.length - 1))
+    setActiveIndex(clamped)
+    const offset = clamped * getCardWidth()
+    if (trackRef.current) {
+      trackRef.current.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)'
+      trackRef.current.style.transform = `translateX(-${offset}px)`
+    }
+  }
+
+  function onMouseDown(e) {
+    isDragging.current = true
+    dragStartX.current = e.clientX
+    baseOffset.current = activeIndex * getCardWidth()
+    if (trackRef.current) trackRef.current.style.transition = 'none'
+  }
+  function onMouseMove(e) {
+    if (!isDragging.current || !trackRef.current) return
+    const delta = e.clientX - dragStartX.current
+    trackRef.current.style.transform = `translateX(${-baseOffset.current + delta}px)`
+  }
+  function onMouseUp(e) {
+    if (!isDragging.current) return
+    isDragging.current = false
+    const delta = e.clientX - dragStartX.current
+    if (delta < -50) goTo(activeIndex + 1)
+    else if (delta > 50) goTo(activeIndex - 1)
+    else goTo(activeIndex)
+  }
+  function onTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX
+    baseOffset.current = activeIndex * getCardWidth()
+    if (trackRef.current) trackRef.current.style.transition = 'none'
+  }
+  function onTouchMove(e) {
+    if (!trackRef.current) return
+    const delta = e.touches[0].clientX - touchStartX.current
+    trackRef.current.style.transform = `translateX(${-baseOffset.current + delta}px)`
+  }
+  function onTouchEnd(e) {
+    const delta = e.changedTouches[0].clientX - touchStartX.current
+    if (delta < -50) goTo(activeIndex + 1)
+    else if (delta > 50) goTo(activeIndex - 1)
+    else goTo(activeIndex)
+  }
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1140px] mx-auto">
-      {cards.map((card, i) => (
-        <BlogCard key={i} {...card} />
-      ))}
-    </div>
+    <>
+      {/* ── MOBILE: drag/swipe slider ── */}
+      <div
+        className="md:hidden overflow-hidden"
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+      >
+        <div
+          ref={trackRef}
+          className="flex gap-4 px-6 will-change-transform cursor-grab active:cursor-grabbing select-none"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          {cards.map((card, i) => (
+            <div key={i} className="flex-shrink-0 w-[75vw]">
+              <BlogCard {...card} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pagination dots — mobile only */}
+      <div className="md:hidden flex justify-center gap-[6px] mt-5 items-center">
+        {cards.map((_, i) => (
+          <div
+            key={i}
+            onClick={() => goTo(i)}
+            className={`h-1 rounded-full bg-black cursor-pointer transition-all duration-300 ${
+              i === activeIndex ? 'w-9 opacity-100' : 'w-3.5 opacity-20'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* ── DESKTOP: original 3-col grid, zero changes ── */}
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1140px] mx-auto">
+        {cards.map((card, i) => (
+          <BlogCard key={i} {...card} />
+        ))}
+      </div>
+    </>
   )
 }

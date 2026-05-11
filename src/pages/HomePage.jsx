@@ -20,7 +20,9 @@ const HomePage = () => {
        <Marquee></Marquee>
        <Features></Features>
        <NewArrivals></NewArrivals>
-       <ScrollingText></ScrollingText>
+      <div className="hidden md:block">
+         <ScrollingText></ScrollingText>
+      </div>
        </div>
     );
 };
