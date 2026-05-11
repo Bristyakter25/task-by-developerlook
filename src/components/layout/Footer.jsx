@@ -34,7 +34,7 @@ const Footer = () => {
             Stay updated with Rise news
           </h3>
 
-          {/* input */}
+          {/* input mail*/}
           <div className="relative mb-5 max-w-[310px]">
             <input
               type="email"
@@ -93,7 +93,7 @@ const Footer = () => {
         >
           <span className="relative  overflow-hidden h-[1.3em]">
             
-            {/* default text */}
+            
             <span
               className="
                 block
@@ -107,7 +107,7 @@ const Footer = () => {
               {item}
             </span>
 
-            {/* hover text */}
+            {/* hovering */}
             <span
               className="
                 absolute
