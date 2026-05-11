@@ -19,7 +19,7 @@ export default function Marquee() {
   const marqueeContent = (
     <div className="flex items-center shrink-0">
       <span
-        className="text-7xl md:text-7xl lg:text-8xl xl:text-10xl  font-sans-primary font-semibold tracking-tight text- leading-none text-grey-900 whitespace-nowrap px-8"
+        className="text-5xl md:text-6xl lg:text-8xl xl:text-10xl  font-sans-primary font-semibold tracking-tight text- leading-none text-grey-900 whitespace-nowrap px-8"
         style={{ letterSpacing: "-0.04em" }}
       >
        Chasing Consumers
@@ -35,7 +35,7 @@ export default function Marquee() {
       
       </span>
       <span
-        className="text-7xl  md:text-7xl  lg:text-8xl  xl:text-10xl  font-sans-primary font-semibold tracking-tight text- leading-none text-grey-900 whitespace-nowrap px-8"
+        className="text-5xl  md:text-6xl  lg:text-8xl  xl:text-10xl  font-sans-primary font-semibold tracking-tight text- leading-none text-grey-900 whitespace-nowrap px-8"
         style={{ letterSpacing: "-0.04em" }}
       >
         Not Chasing Algorithms
