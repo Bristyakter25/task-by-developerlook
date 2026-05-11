@@ -42,9 +42,9 @@ const Footer = () => {
               className="h-[58px] w-full rounded-full border border-[#1f1f1f] bg-[#302c2c] px-5 py-3 text-[18px] font-medium tracking-[-0.03em] text-white placeholder:text-[#928686] placeholder:font-semibold placeholder:text-xl outline-none"
             />
 
-            <button className="absolute right-[6px] top-1/2 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full bg-[#c8fff2] text-black transition-transform duration-300 hover:scale-105">
-              <HiArrowUpRight className="text-[20px]" />
-            </button>
+            <button className="absolute right-[6px] top-1/2 flex h-[46px] w-[46px] -translate-y-1/2 items-center justify-center rounded-full bg-[#c8fff2] text-black transition-transform duration-300 hover:scale-105 group/btn">
+  <HiArrowUpRight className="text-[20px] transition-transform duration-300 group-hover/btn:rotate-90" />
+</button>
           </div>
 
           {/* socials */}
