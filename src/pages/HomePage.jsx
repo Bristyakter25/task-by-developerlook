@@ -11,7 +11,7 @@ import ServiceSection from "../components/sections/ServiceSection";
 
 const HomePage = () => {
     return (
-       <div className="bg-[#f0f0f0] w-full">
+       <div className="bg-[#f0f0f0] max-w-6xl">
        <Banner></Banner>
        <BrandNames></BrandNames>
        <ServiceSection></ServiceSection>

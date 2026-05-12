@@ -19,7 +19,7 @@ const ServiceSection = () => {
       <section className="md:w-3/5 flex flex-col items-start">
 
         {/* Heading */}
-        <h1 className="text-5xl md:text-[772px] lg:text-6xl font-semibold tracking-tighter text-gray-900 font-sans leading-[0.92]">
+        <h1 className="text-2xl md:text-[572px] lg:text-6xl font-semibold tracking-tighter text-gray-900 font-sans leading-[0.92]">
           Driving Demand &amp;
           <br />
           <span className="inline-flex mt-1 items-end gap-2">

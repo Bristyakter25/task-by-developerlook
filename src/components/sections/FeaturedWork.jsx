@@ -4,7 +4,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import img1 from "../../assets/images/work1.PNG";
 import img2 from "../../assets/images/work2.PNG";
 import img3 from "../../assets/images/work3.PNG";
@@ -38,6 +38,18 @@ const projectColors = [
   "#222222","#F4A261","#52B788","#E63946","#457B9D","#6D23B6",
 ];
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 1024 : false
+  );
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener("resize", fn);
+    return () => window.removeEventListener("resize", fn);
+  }, []);
+  return isMobile;
+}
+
 function Tag({ label }) {
   return (
     <div className="absolute bottom-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 text-white text-[10px] font-bold">
@@ -50,7 +62,7 @@ function Tag({ label }) {
   );
 }
 
-// Image card with cursor-follow hover effect
+
 function HoverImageCard({ children, tag, className = "" }) {
   const wrapperRef = useRef(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -70,7 +82,6 @@ function HoverImageCard({ children, tag, className = "" }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Cursor-following arrow */}
       <div
         className="pointer-events-none absolute z-20 transition-opacity duration-300"
         style={{
@@ -91,7 +102,6 @@ function HoverImageCard({ children, tag, className = "" }) {
         </div>
       </div>
 
-      {/* Content (image or color panel) */}
       <div className="w-full h-full transition-all duration-500 ease-out group-hover:brightness-75 group-hover:scale-105">
         {children}
       </div>
@@ -135,7 +145,79 @@ function MainImageCard({ proj, isHovered, colorIdx, tag, className = "" }) {
   );
 }
 
-export default function FeaturedWork() {
+// Mobile
+function MobileFeaturedWork() {
+  return (
+    <div>
+      <div className="p-4">
+        <div className="w-full bg-[#0c0c0c] rounded-[32px] overflow-hidden">
+          <p className="text-[14px] pl-7 pt-6 pb-4 font-bold text-white uppercase">Featured Work</p>
+
+        
+          <div className="flex flex-col gap-6 p-4 pb-6">
+            {projects.map((proj, i) => {
+              // const nextProj = projects[i + 1] ?? null;
+
+              return (
+                <div key={proj.id} className="flex flex-col gap-3">
+
+                  {/* Main image  */}
+                  <MainImageCard
+                    proj={proj}
+                    isHovered={false}
+                    colorIdx={i}
+                    tag={proj.category}
+                    className="w-full rounded-2xl"
+                    style={{ height: "58vw" }}
+                  />
+
+                  {/* Project info */}
+                  <div className="px-1">
+                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">
+                      {proj.category}
+                    </p>
+                    <div className="flex items-baseline gap-3">
+                      <h3 className="text-white font-bold text-2xl leading-tight tracking-tighter">
+                        {proj.title}
+                      </h3>
+                      <span className="text-[10px] text-white/30 font-mono">{proj.year}</span>
+                    </div>
+                    <p className="text-white/60 text-sm mt-1 leading-relaxed">
+                      {proj.description}
+                    </p>
+                  </div>
+
+                  
+                  {/* {nextProj && (
+                    <HoverImageCard
+                      tag={nextProj.category}
+                      className="w-full rounded-2xl translate-y-2"
+                      style={{ height: "32vw" }}
+                    >
+                      <img
+                        src={nextProj.image}
+                        className="w-full h-full object-cover object-top"
+                        style={{ height: "32vw" }}
+                      />
+                    </HoverImageCard>
+                  )} */}
+
+                  {/* Divider between projects (skip after last) */}
+                  {i < projects.length - 1 && (
+                    <div className="w-full h-[1px] bg-white/10 mt-2" />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Desktop
+function DesktopFeaturedWork() {
   const [active, setActive]   = useState(0);
   const [hovered, setHovered] = useState(null);
   const containerRef          = useRef(null);
@@ -156,136 +238,140 @@ export default function FeaturedWork() {
   const isLast      = active === projects.length - 1;
 
   return (
-    <div>
-      <div ref={containerRef} className="relative" style={{ height: `${projects.length * 100}vh` }}>
-        <div className="sticky top-0 w-full flex items-center justify-center p-4 md:p-6 h-screen overflow-hidden">
-          <div className="w-full h-full max-w-[1400px] bg-[#0c0c0c] rounded-[40px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 max-h-[90vh] lg:max-h-none">
-<p className="lg:hidden text-[14px] pl-7 pt-6 font-bold text-white uppercase">Featured Work</p>
-            {/* LEFT: CONTENT & LIST — hidden on mobile/tablet, visible on lg+ */}
-            <div className="hidden lg:flex flex-col justify-between p-10 md:p-16">
-              <p className="text-[14px] font-bold text-white uppercase">Featured Work</p>
+    <div ref={containerRef} className="relative" style={{ height: `${projects.length * 100}vh` }}>
+      <div className="sticky top-0 w-full flex items-center justify-center p-4 md:p-6 h-screen">
+        <div className="w-full h-full max-w-[1400px] bg-[#0c0c0c] rounded-[40px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 max-h-[90vh] lg:max-h-none">
+          <p className="lg:hidden text-[14px] pl-7 pt-6 font-bold text-white uppercase">Featured Work</p>
 
-              <div className="flex flex-col gap-1">
-                {projects.map((p, i) => {
-                  const isPast   = i < active;
-                  const isActive = i === active;
-                  const isNext   = i === active + 1;
-                  const isFar    = i > active + 1;
+          {/* LEFT */}
+          <div className="hidden lg:flex flex-col justify-between p-10 md:p-16">
+            <p className="text-[14px] font-bold text-white uppercase">Featured Work</p>
 
-                  if (isPast && i < active - 1) return null;
-                  if (isFar  && i > active + 3) return null;
+            <div className="flex flex-col gap-1">
+              {projects.map((p, i) => {
+                const isPast   = i < active;
+                const isActive = i === active;
+                const isNext   = i === active + 1;
+                const isFar    = i > active + 1;
 
-                  return (
-                    <motion.div
-                      key={p.id}
-                      animate={{
-                        opacity: isActive ? 1 : isNext ? 0.4 : 0.1,
-                        scale: isActive ? 1 : 0.95,
-                      }}
-                      className="flex items-start gap-4 cursor-pointer origin-left"
-                      onClick={() => setActive(i)}
-                      onMouseEnter={() => setHovered(i)}
-                      onMouseLeave={() => setHovered(null)}
-                    >
-                      <h2 className={`font-bold leading-[0.9] tracking-tighter text-white ${
-                        isActive ? "text-4xl md:text-6xl" : "text-4xl md:text-5xl opacity-50"
-                      }`}>
-                        {p.title}
-                      </h2>
-                      {(isActive || isNext) && (
-                        <span className="text-[10px] text-white/30 mt-2 font-mono">{p.year}</span>
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </div>
+                if (isPast && i < active - 1) return null;
+                if (isFar  && i > active + 3) return null;
 
-              <div className="space-y-6">
-                <AnimatePresence mode="wait">
+                return (
                   <motion.div
-                    key={displayIdx}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="max-w-xs"
+                    key={p.id}
+                    animate={{
+                      opacity: isActive ? 1 : isNext ? 0.4 : 0.1,
+                      scale: isActive ? 1 : 0.95,
+                    }}
+                    className="flex items-start gap-4 cursor-pointer origin-left"
+                    onClick={() => setActive(i)}
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
                   >
-                    <div className="w-8 h-[2px] bg-white mb-6" />
-                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">{currentProj.category}</p>
-                    <p className="text-white/80 text-sm leading-relaxed">{currentProj.description}</p>
+                    <h2 className={`font-bold leading-[0.9] tracking-tighter text-white ${
+                      isActive ? "text-4xl md:text-6xl" : "text-4xl md:text-5xl opacity-50"
+                    }`}>
+                      {p.title}
+                    </h2>
+                    {(isActive || isNext) && (
+                      <span className="text-[10px] text-white/30 mt-2 font-mono">{p.year}</span>
+                    )}
                   </motion.div>
-                </AnimatePresence>
+                );
+              })}
+            </div>
 
-                <div className="flex gap-2">
-                  {projects.map((_, i) => (
-                    <div key={i} className={`h-[2px] transition-all duration-500 ${i === active ? "w-8 bg-white" : "w-3 bg-white/20"}`} />
-                  ))}
-                </div>
+            <div className="space-y-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={displayIdx}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="max-w-xs"
+                >
+                  <div className="w-8 h-[2px] bg-white mb-6" />
+                  <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">{currentProj.category}</p>
+                  <p className="text-white/80 text-sm leading-relaxed">{currentProj.description}</p>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="flex gap-2">
+                {projects.map((_, i) => (
+                  <div key={i} className={`h-[2px] transition-all duration-500 ${i === active ? "w-8 bg-white" : "w-3 bg-white/20"}`} />
+                ))}
               </div>
             </div>
+          </div>
 
-            {/* RIGHT: IMAGE GRID — full width on mobile, half on lg+ */}
-            <div className="relative w-full lg:w-[500px] mt-2 h-[70vh] lg:h-full flex flex-col gap-4 p-4 overflow-hidden">
+          {/* RIGHT */}
+          <div className="relative w-full lg:w-[500px] mt-2 h-[70vh] lg:h-full flex flex-col gap-4 p-4 overflow-hidden">
+            {isLast ? (
+              <>
+                <HoverImageCard tag={projects[active - 1].category} className="flex-1 -translate-y-4">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={projects[active - 1].image}
+                      src={projects[active - 1].image}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
+                      className="w-full h-full object-cover"
+                    />
+                  </AnimatePresence>
+                </HoverImageCard>
 
-              {isLast ? (
-                <>
-                  {/* Previous image peeks from TOP */}
-                  <HoverImageCard tag={projects[active - 1].category} className="flex-1 -translate-y-4">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={projects[active - 1].image}
-                        src={projects[active - 1].image}
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-                        className="w-full h-full object-cover"
-                      />
-                    </AnimatePresence>
-                  </HoverImageCard>
+                <MainImageCard
+                  proj={currentProj}
+                  isHovered={hovered !== null}
+                  colorIdx={displayIdx}
+                  tag={currentProj.category}
+                  className="flex-[1.3] mb-5"
+                />
+              </>
+            ) : (
+              <>
+                <MainImageCard
+                  proj={currentProj}
+                  isHovered={hovered !== null}
+                  colorIdx={displayIdx}
+                  tag={currentProj.category}
+                  className="flex-[1.3]"
+                />
 
-                  {/* Last (current) image at BOTTOM */}
-                  <MainImageCard
-                    proj={currentProj}
-                    isHovered={hovered !== null}
-                    colorIdx={displayIdx}
-                    tag={currentProj.category}
-                    className="flex-[1.3] mb-5"
-                  />
-                </>
-              ) : (
-                <>
-                  {/* Main Active Image */}
-                  <MainImageCard
-                    proj={currentProj}
-                    isHovered={hovered !== null}
-                    colorIdx={displayIdx}
-                    tag={currentProj.category}
-                    className="flex-[1.3]"
-                  />
-
-                  {/* Peek Next Image */}
-                  <HoverImageCard tag={nextProj.category} className="flex-1 translate-y-4">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={nextProj.image}
-                        src={nextProj.image}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </AnimatePresence>
-                  </HoverImageCard>
-                </>
-              )}
-
-            </div>
+                <HoverImageCard tag={nextProj.category} className="flex-1 translate-y-4">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={nextProj.image}
+                      src={nextProj.image}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </AnimatePresence>
+                </HoverImageCard>
+              </>
+            )}
           </div>
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="flex items-center justify-center mb-5">
+// Root 
+export default function FeaturedWork() {
+  const isMobile = useIsMobile();
+
+  return (
+    <div className="relative w-full overflow-x-clip">
+      {isMobile ? <MobileFeaturedWork /> : <DesktopFeaturedWork />}
+
+      <div className="flex items-center justify-center mb-5 mt-2">
         <button className="group relative flex items-center gap-2 overflow-hidden bg-white text-black px-5 py-3 rounded-full font-bold hover:rounded-xl transition-[border-radius] duration-300">
           <span className="relative overflow-hidden h-[1.2em] flex items-center">
             <span className="block font-sans-primary font-medium whitespace-nowrap translate-y-0 group-hover:-translate-y-[110%] transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
